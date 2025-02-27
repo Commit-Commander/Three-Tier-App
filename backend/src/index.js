@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Define the server port from environment variables or default to 3000
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 // Destructure and initialize the PostgreSQL Client
 const { Client } = pkg;
