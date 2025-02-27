@@ -22,8 +22,10 @@ pipeline {
                     passwordVariable: "dockerHubPassword"
                 )]) {
                     sh "docker login -u ${dockerHubUsername} -p ${dockerHubPassword}"
-                    sh "docker image tag backend-app ${dockerHubUsername}/backend-app && docker image tag frontend-app ${dockerHubUsername}/frontend-app"
-                    sh "docker push ${dockerHubUsername}/backend-app && docker push ${dockerHubUsername}/frontend-app"
+                    sh "docker image tag backend-app ${dockerHubUsername}/backend-app"
+                    sh "docker image tag frontend-app ${dockerHubUsername}/frontend-app"
+                    sh "docker push ${dockerHubUsername}/backend-app" 
+                    sh "docker push ${dockerHubUsername}/frontend-app"
                 }
             }
         }

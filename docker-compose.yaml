@@ -6,7 +6,7 @@ services:
     # Use the official PostgreSQL image with a specific version
     image: postgres:15.10-alpine3.20
     # Set the container name for easy identification
-    container_name: postgres
+    container_name: postgres_db
     # Environment variables for database configuration
     environment:
       - .env
