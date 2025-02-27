@@ -8,7 +8,7 @@ services:
     # Set the container name for easy identification
     container_name: postgres_db
     # Environment variables for database configuration
-    environment:
+    env_file:
       - .env
     # Expose PostgreSQL port to the host machine (for accessing DB)
     ports:
@@ -33,7 +33,7 @@ services:
     # Set the container name for easy identification
     container_name: backend
     # Environment variables for the backend to connect to PostgreSQL
-    environment:
+    env_file:
       - .env
     # Expose the backend application port to the host machine
     ports:
@@ -55,7 +55,7 @@ services:
     # Set the container name for easy identification
     container_name: frontend
     # Environment variables for the frontend to access the API endpoint
-    environment:
+    env_file:
       - .env
     # Expose the frontend application port to the host machine
     ports:
