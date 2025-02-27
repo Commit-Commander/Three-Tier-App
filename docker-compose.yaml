@@ -54,9 +54,6 @@ services:
     image: kartikeynarayan/frontend-app
     # Set the container name for easy identification
     container_name: frontend
-    # Environment variables for the frontend to access the API endpoint
-    env_file:
-      - .env
     # Expose the frontend application port to the host machine
     ports:
       - "5000:80"

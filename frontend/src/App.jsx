@@ -11,13 +11,10 @@ function App() {
   // State to hold the value of the new task input field
   const [newTask, setNewTask] = useState('');
 
-  // Use the environment variable for the base URL
-  const apiUrl = import.meta.env.VITE_API_URL;
-
   // Fetch tasks from the backend when the component mounts
   useEffect(() => {
     // Make a GET request to fetch all tasks
-    axios.get(`${apiUrl}/todos`)
+    axios.get('http://54.246.12.50:8000/api/todos')
       .then(response => {
         // Set the fetched tasks to the state
         setTasks(response.data);
@@ -26,14 +23,14 @@ function App() {
         // Log any errors encountered while fetching tasks
         console.error("Error fetching tasks:", error);
       });
-  }, [apiUrl]);
+  }, []);
 
   // Function to add a new task
   const addTask = () => {
     // Check if the new task input is not empty
     if (newTask.trim()) {
       // Make a POST request to add a new task to the backend
-      axios.post(`${apiUrl}/todos`, { task: newTask })
+      axios.post('http://54.246.12.50:8000/api/todos', { task: newTask })
         .then(() => {
           // Add the new task to the state, so it's displayed on the page
           setTasks([...tasks, { task: newTask }]);
