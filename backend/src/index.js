@@ -11,7 +11,9 @@ dotenv.config();
 const app = express();
 
 // Enable Cross-Origin Resource Sharing (CORS) middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://54.246.12.50:5000/'
+}));
 
 // Middleware to parse JSON bodies in incoming requests
 app.use(express.json());
