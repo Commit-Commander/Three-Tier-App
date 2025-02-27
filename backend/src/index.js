@@ -31,14 +31,30 @@ const client = new Client({
     port: process.env.DB_PORT,         // PostgreSQL port (default is 5432)
 });
 
-// Connect to the PostgreSQL database
-client.connect(error => {
-    if (error) {
-        console.error('Connection error:', error.stack); // Log connection errors
-    } else {
-        console.log('Connected to the database.'); // Log successful connection
+const initializeDatabase = async () => {
+    try {
+        // Connect to the PostgreSQL database
+        await client.connect();
+        console.log('Connected to the database.');
+  
+        // Define the SQL query to create the "todos" table if it doesn't exist
+        const createTableQuery = `
+            CREATE TABLE IF NOT EXISTS todos (
+            id SERIAL PRIMARY KEY,
+            task TEXT NOT NULL
+            );
+        `;
+  
+        // Execute the query to create the table
+        await client.query(createTableQuery);
+        console.log('Table "todos" is ready.');
+    } catch (error) {
+        console.error('Error during database initialization:', error.stack);
     }
-});
+};
+  
+// Call the function to initialize the database
+initializeDatabase();
 
 // Define a GET route for the root path
 app.get('/', async (req, res) => {
