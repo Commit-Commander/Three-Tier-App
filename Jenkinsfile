@@ -33,7 +33,7 @@ pipeline {
                     credentialsId: 'three_tier_env_file_credentials', 
                     variable: 'ENV_FILE'
                 )]) {
-                    sh "rm -r .env && cp ${env.ENV_FILE} .env"
+                    sh "rm -f .env && cp ${env.ENV_FILE} .env"
                 }
             }
         }
