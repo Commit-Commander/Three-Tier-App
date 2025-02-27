@@ -10,7 +10,8 @@ pipeline {
         }
         stage("Build") {
             steps {
-                sh "docker build -t backend-app ./backend/Dockerfile && docker build -t frontend-app ./frontend/Dockerfile"
+                sh "cd backend/ && docker build -t backend-app ."
+                sh "cd frontend/ && docker build -t frontend-app ."
             }
         }
         stage("Push") {
