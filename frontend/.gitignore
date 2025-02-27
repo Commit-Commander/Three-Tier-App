@@ -1,0 +1,31 @@
+# Ignore logs and other generated files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Ignore node_modules and build output
+node_modules
+dist
+dist-ssr
+
+# Ignore local files with .local extension
+*.local
+
+# Ignore environment variable
+.env
+
+# Ignore editor-specific directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Ignore Visual Studio files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

@@ -1,0 +1,78 @@
+# Define services that will run in the containers
+services:
+
+  # PostgreSQL Service
+  postgres:
+    # Use the official PostgreSQL image with a specific version
+    image: postgres:15.10-alpine3.20
+    # Set the container name for easy identification
+    container_name: postgres
+    # Environment variables for database configuration
+    environment:
+      - .env
+    # Expose PostgreSQL port to the host machine (for accessing DB)
+    ports:
+      - "5432:5432"
+    # Persist the database data between container restarts
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    # Attach this service to the custom network
+    networks:
+      - three-tier-network
+    # Health check to ensure PostgreSQL is ready
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend (Node.js/Express) Service
+  backend:
+    # Use the custom backend app image
+    image: kartikeynarayan/backend-app
+    # Set the container name for easy identification
+    container_name: backend
+    # Environment variables for the backend to connect to PostgreSQL
+    environment:
+      - .env
+    # Expose the backend application port to the host machine
+    ports:
+      - "8000:8000"
+    # Attach this service to the custom network
+    networks:
+      - three-tier-network
+    # Ensure the app waits for PostgreSQL to be healthy before running
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Automatically restart the backend app if it crashes
+    restart: always
+
+  # Frontend (React) Service
+  frontend:
+    # Use the custom frontend app image
+    image: kartikeynarayan/frontend-app
+    # Set the container name for easy identification
+    container_name: frontend
+    # Environment variables for the frontend to access the API endpoint
+    environment:
+      - .env
+    # Expose the frontend application port to the host machine
+    ports:
+      - "3000:80"
+    # Attach this service to the custom network
+    networks:
+      - three-tier-network
+    # Ensure the frontend waits for the backend to start before running
+    depends_on:
+      - backend
+    # Automatically restart the frontend app if it crashes
+    restart: always 
+
+# Define volumes to persist PostgreSQL data between container restarts
+volumes:
+  postgres:
+
+# Define a custom network for all services to communicate securely
+networks:
+  three-tier-network:

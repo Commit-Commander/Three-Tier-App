@@ -1,0 +1,14 @@
+# Ignore the node_modules directory (contains installed dependencies)
+node_modules
+
+# Ignore npm debug logs
+npm-debug.log
+
+# Ignore macOS-specific metadata files
+.DS_Store
+
+# Ignore the Git directory
+.git
+
+# Ignore environment variable files (contains sensitive data)
+.env
