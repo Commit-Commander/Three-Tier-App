@@ -12,7 +12,7 @@ const app = express();
 
 // Enable Cross-Origin Resource Sharing (CORS) middleware
 app.use(cors({
-    origin: 'http://54.246.12.50:5000/'
+    origin: 'http://54.246.12.50:5000'
 }));
 
 // Middleware to parse JSON bodies in incoming requests
