@@ -38,7 +38,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                "docker compose up -d"
+                sh "docker compose up -d"
             }
         }
         stage("Clean Up") {
